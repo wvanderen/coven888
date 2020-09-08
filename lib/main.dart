@@ -11,6 +11,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Coven 888',
       home: CovenHomePage(),
+      initialRoute: '/home',
+      routes: {
+        '/home': (context) => CovenHomePage(),
+        '/about': (context) => CovenAboutPage(),
+        '/contact': (context) => CovenContactPage()
+      },
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -62,29 +68,30 @@ class _CovenHomePageState extends State<CovenHomePage> {
     });
   }
 
-//TODO: implement routing on nav bar clicks
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(title: const Text("Coven 888"), actions: <Widget>[
-        FlatButton(
-            onPressed: () {
-              //_selectChoice(PageChoice.Home);
-            },
-            child: Text("Home")),
-        FlatButton(
-            onPressed: () {
-              //_selectChoice(PageChoice.About);
-            },
-            child: Text("About")),
-        FlatButton(
-            onPressed: () {
-              // _selectChoice(PageChoice.Contact);
-            },
-            child: Text("Contact"))
-      ]),
+      appBar: AppBar(
+          title: const Text("Coven 888", style: TextStyle(fontSize: 30)),
+          centerTitle: true,
+          actions: <Widget>[
+            FlatButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/home');
+                },
+                child: Text("Home", style: TextStyle(fontSize: 20))),
+            FlatButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/about');
+                },
+                child: Text("About", style: TextStyle(fontSize: 20))),
+            FlatButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/contact');
+                },
+                child: Text("Contact", style: TextStyle(fontSize: 20)))
+          ]),
       body: new Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -119,6 +126,76 @@ class _CovenHomePageState extends State<CovenHomePage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class CovenAboutPage extends StatefulWidget {
+  @override
+  _CovenAboutPageState createState() => _CovenAboutPageState();
+}
+
+class _CovenAboutPageState extends State<CovenAboutPage> {
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+          title: const Text("Coven 888", style: TextStyle(fontSize: 30)),
+          centerTitle: true,
+          actions: <Widget>[
+            FlatButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/home');
+                },
+                child: Text("Home", style: TextStyle(fontSize: 20))),
+            FlatButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/about');
+                },
+                child: Text("About", style: TextStyle(fontSize: 20))),
+            FlatButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/contact');
+                },
+                child: Text("Contact", style: TextStyle(fontSize: 20)))
+          ]),
+      //body:
+    );
+  }
+}
+
+class CovenContactPage extends StatefulWidget {
+  @override
+  _CovenContactPageState createState() => _CovenContactPageState();
+}
+
+class _CovenContactPageState extends State<CovenContactPage> {
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+          title: const Text("Coven 888", style: TextStyle(fontSize: 30)),
+          centerTitle: true,
+          actions: <Widget>[
+            FlatButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/home');
+                },
+                child: Text("Home", style: TextStyle(fontSize: 20))),
+            FlatButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/about');
+                },
+                child: Text("About", style: TextStyle(fontSize: 20))),
+            FlatButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/contact');
+                },
+                child: Text("Contact", style: TextStyle(fontSize: 20)))
+          ]),
+      //body:
     );
   }
 }
