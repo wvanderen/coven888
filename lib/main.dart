@@ -39,7 +39,15 @@ class CovenHomePage extends StatefulWidget {
 
 class _CovenHomePageState extends State<CovenHomePage> {
   double mult = 0.65;
-  var colors = [Colors.red, Colors.orange, Colors.yellow, Colors.green, Colors.blue, Colors.indigo, Colors.purple];
+  var colors = [
+    Colors.red,
+    Colors.orange,
+    Colors.yellow,
+    Colors.green,
+    Colors.blue,
+    Colors.indigo,
+    Colors.purple
+  ];
   var sigilColor = Colors.white;
   int sigilState = -1;
 
@@ -53,47 +61,64 @@ class _CovenHomePageState extends State<CovenHomePage> {
       sigilColor = materialColor;
     });
   }
+
+//TODO: implement routing on nav bar clicks
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        backgroundColor: Colors.black,
-        body: new Container(
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 50.0),
-                  child: Text(
-                    'COVEN888',
+      backgroundColor: Colors.black,
+      appBar: AppBar(title: const Text("Coven 888"), actions: <Widget>[
+        FlatButton(
+            onPressed: () {
+              //_selectChoice(PageChoice.Home);
+            },
+            child: Text("Home")),
+        FlatButton(
+            onPressed: () {
+              //_selectChoice(PageChoice.About);
+            },
+            child: Text("About")),
+        FlatButton(
+            onPressed: () {
+              // _selectChoice(PageChoice.Contact);
+            },
+            child: Text("Contact"))
+      ]),
+      body: new Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 50.0),
+                child: Text('COVEN888',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 100.0,
-                      fontFamily: 'Unica One'
-                    )
-                  ),
+                        color: Colors.white,
+                        fontSize: 100.0,
+                        fontFamily: 'Unica One')),
+              ),
+            ),
+            FlatButton(
+              onPressed: () {
+                alterImage();
+              },
+              child: AnimatedContainer(
+                duration: new Duration(milliseconds: 300),
+                curve: Curves.easeInCubic,
+                color: sigilColor,
+                child: Image(
+                  image: new AssetImage("assets/images/covenbg.png"),
+                  height: MediaQuery.of(context).size.height * 0.75,
+                  colorBlendMode: BlendMode.colorBurn,
                 ),
               ),
-              FlatButton(
-                onPressed: () {
-                  alterImage();
-                },
-                child: AnimatedContainer(
-                  duration: new Duration(milliseconds: 300),
-                  curve: Curves.easeInCubic,
-                  color: sigilColor,
-                  child: Image(
-                    image: new AssetImage("assets/images/covenbg.png"),
-                    height: MediaQuery.of(context).size.height * 0.75,
-                    colorBlendMode: BlendMode.colorBurn,
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
     );
   }
 }
