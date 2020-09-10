@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(MyApp());
@@ -138,11 +140,13 @@ class CovenAboutPage extends StatefulWidget {
 }
 
 class AboutTile extends StatelessWidget {
-  AboutTile(var picture, var userName, var titleLine, var description) {
+  AboutTile(var picture, var userName, var titleLine, var description,
+      var twitterLink) {
     this.picture = picture;
     this.userName = userName;
     this.titleLine = titleLine;
     this.description = description;
+    this.twitterLink = twitterLink;
   }
 
   @override
@@ -171,7 +175,14 @@ class AboutTile extends StatelessWidget {
               text: ' ' + titleLine,
               style: TextStyle(color: Colors.white, fontSize: 20)),
           TextSpan(
-              text: '\n' + description, style: TextStyle(color: Colors.white))
+              text: '\n' + description, style: TextStyle(color: Colors.white)),
+          TextSpan(
+              text: '\n\n' + "Twitter",
+              style: TextStyle(color: Colors.blue),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  launch(twitterLink);
+                })
         ]))
       ],
     );
@@ -181,6 +192,7 @@ class AboutTile extends StatelessWidget {
   var userName;
   var titleLine;
   var description;
+  var twitterLink;
 }
 
 class _CovenAboutPageState extends State<CovenAboutPage> {
@@ -214,17 +226,20 @@ class _CovenAboutPageState extends State<CovenAboutPage> {
               "assets/images/phosphoros.jpeg",
               'Phosphoros',
               'is the Grand Daemon of Coven 888',
-              'They are a powerful mage that fucks with potions, rituals, and everything in between.'),
+              'They are a powerful mage that fucks with potions, rituals, and everything in between.',
+              'https://www.twitter.com/phosphoros888'),
           AboutTile(
               "assets/images/protoneutype.jpeg",
               'protoneutype',
               'is the Technomancer of Coven 888',
-              'He journeys within to enable exploration of the cosmos and the web.'),
+              'He journeys within to enable exploration of the cosmos and the web.',
+              'https://www.twitter.com/protoneutype'),
           AboutTile(
               "assets/images/NFLM.jpeg",
               'NFLM',
               'is the Arch-Mage of Coven 888',
-              'He is a chaote that is pretty sure this stuff matters.'),
+              'He is a chaote that is pretty sure this stuff matters.',
+              'https://www.twitter.com/NFLM888'),
         ]));
   }
 }
