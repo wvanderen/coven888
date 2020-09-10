@@ -43,6 +43,8 @@ class CovenHomePage extends StatefulWidget {
   _CovenHomePageState createState() => _CovenHomePageState();
 }
 
+//TODO: remove white edges and white visual noise/specks from sigil
+//TODO: fix bottom overflow that appears when shrinking window
 class _CovenHomePageState extends State<CovenHomePage> {
   double mult = 0.65;
   var colors = [
@@ -135,33 +137,95 @@ class CovenAboutPage extends StatefulWidget {
   _CovenAboutPageState createState() => _CovenAboutPageState();
 }
 
+class AboutTile extends StatelessWidget {
+  AboutTile(var picture, var userName, var titleLine, var description) {
+    this.picture = picture;
+    this.userName = userName;
+    this.titleLine = titleLine;
+    this.description = description;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildAboutTile(
+        this.picture, this.userName, this.titleLine, this.description);
+  }
+
+//TODO: implement padding so we can take out the SizedBox-es
+  Widget _buildAboutTile(
+      var picture, var userName, var titleLine, var description) {
+    return new Row(
+      children: [
+        SizedBox(width: 20, height: 200),
+        CircleAvatar(backgroundImage: new AssetImage(picture), radius: 75),
+        SizedBox(width: 20),
+        RichText(
+            text: TextSpan(children: [
+          TextSpan(
+              text: userName,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20)),
+          TextSpan(
+              text: ' ' + titleLine,
+              style: TextStyle(color: Colors.white, fontSize: 20)),
+          TextSpan(
+              text: '\n' + description, style: TextStyle(color: Colors.white))
+        ]))
+      ],
+    );
+  }
+
+  var picture;
+  var userName;
+  var titleLine;
+  var description;
+}
+
 class _CovenAboutPageState extends State<CovenAboutPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-          title: const Text("Coven 888", style: TextStyle(fontSize: 30)),
-          centerTitle: true,
-          actions: <Widget>[
-            FlatButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/home');
-                },
-                child: Text("Home", style: TextStyle(fontSize: 20))),
-            FlatButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/about');
-                },
-                child: Text("About", style: TextStyle(fontSize: 20))),
-            FlatButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/contact');
-                },
-                child: Text("Contact", style: TextStyle(fontSize: 20)))
-          ]),
-      //body:
-    );
+        backgroundColor: Colors.black,
+        appBar: AppBar(
+            title: const Text("Coven 888", style: TextStyle(fontSize: 30)),
+            centerTitle: true,
+            actions: <Widget>[
+              FlatButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/home');
+                  },
+                  child: Text("Home", style: TextStyle(fontSize: 20))),
+              FlatButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/about');
+                  },
+                  child: Text("About", style: TextStyle(fontSize: 20))),
+              FlatButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/contact');
+                  },
+                  child: Text("Contact", style: TextStyle(fontSize: 20)))
+            ]),
+        //TODO: make this column responsive so that the text doesn't clip when shrinking the page
+        body: Column(children: <Widget>[
+          AboutTile(
+              "assets/images/phosphoros.jpeg",
+              'Phosphoros',
+              'is the Grand Daemon of Coven 888',
+              'They are a powerful mage that fucks with potions, rituals, and everything in between.'),
+          AboutTile(
+              "assets/images/protoneutype.jpeg",
+              'protoneutype',
+              'is the Technomancer of Coven 888',
+              'He journeys within to enable exploration of the cosmos and the web.'),
+          AboutTile(
+              "assets/images/NFLM.jpeg",
+              'NFLM',
+              'is the Arch-Mage of Coven 888',
+              'He is a chaote that is pretty sure this stuff matters.'),
+        ]));
   }
 }
 
@@ -170,6 +234,7 @@ class CovenContactPage extends StatefulWidget {
   _CovenContactPageState createState() => _CovenContactPageState();
 }
 
+//TODO: add links to twitter, email, discord
 class _CovenContactPageState extends State<CovenContactPage> {
   @override
   Widget build(BuildContext context) {
@@ -195,7 +260,6 @@ class _CovenContactPageState extends State<CovenContactPage> {
                 },
                 child: Text("Contact", style: TextStyle(fontSize: 20)))
           ]),
-      //body:
     );
   }
 }
