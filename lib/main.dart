@@ -159,31 +159,36 @@ class AboutTile extends StatelessWidget {
   Widget _buildAboutTile(
       var picture, var userName, var titleLine, var description) {
     return new Row(
-      children: [
+      children: <Widget>[
         SizedBox(width: 20, height: 200),
         CircleAvatar(backgroundImage: new AssetImage(picture), radius: 75),
         SizedBox(width: 20),
-        RichText(
-            text: TextSpan(children: [
-          TextSpan(
-              text: userName,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20)),
-          TextSpan(
-              text: ' ' + titleLine,
-              style: TextStyle(color: Colors.white, fontSize: 20)),
-          TextSpan(
-              text: '\n' + description, style: TextStyle(color: Colors.white)),
-          TextSpan(
-              text: '\n\n' + "Twitter",
-              style: TextStyle(color: Colors.blue),
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  launch(twitterLink);
-                })
-        ]))
+        Expanded(
+            child: RichText(
+                text: TextSpan(
+          children: [
+            TextSpan(
+                text: userName,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20)),
+            TextSpan(
+                text: ' ' + titleLine,
+                style: TextStyle(color: Colors.white, fontSize: 20)),
+            TextSpan(
+                text: '\n' + description,
+                style: TextStyle(color: Colors.white)),
+            TextSpan(
+                text: '\n\n' + "Twitter",
+                style: TextStyle(color: Colors.blue),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    launch(twitterLink);
+                  })
+          ],
+        ))),
+        SizedBox(width: 20)
       ],
     );
   }
@@ -239,8 +244,12 @@ class _CovenAboutPageState extends State<CovenAboutPage> {
               'NFLM',
               'is the Arch-Mage of Coven 888',
               'He is a chaote that is pretty sure this stuff matters.',
-              'https://www.twitter.com/NFLM888'),
-        ]));
+              'https://www.twitter.com/NFLM888')
+        ])
+
+        //Column(children: <Widget>[
+
+        );
   }
 }
 
